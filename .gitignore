@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# Native builds / Prebuild outputs (iOS & Android)
+/ios/
+/android/
+*.orig.*
+
+# Environment variables & secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.keystore
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Editor directories and files (VS Code, WebStorm, Android Studio, Xcode)
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.patch
+
+# macOS / OS artifacts
+.DS_Store
+.AppleDouble
+.lsbundle
+Thumbs.db
+ehthumbs.db
+
+# TypeScript / Build output
+*.tsbuildinfo
