@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Alert, Text, FlatList} from "react-native";
+import {View, StyleSheet, Alert, FlatList} from "react-native";
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
@@ -33,7 +33,7 @@ function GameScreen({userNumber, onGameOver}) {
 
     useEffect(() => {
         if (currentGuess === userNumber){
-            onGameOver()
+            onGameOver(guessRounds.length)
         }
     }, [currentGuess, userNumber, onGameOver])
 
@@ -87,7 +87,7 @@ function GameScreen({userNumber, onGameOver}) {
                     </View>
                 </View>
             </Card>
-            <View>
+            <View style={styles.listContainer}>
                 <FlatList
                     data={guessRounds}
                     renderItem={(itemData) => <GuessLogItem guess={itemData.item} roundNumber={guessRoundsListLength - itemData.index}/>}
@@ -113,6 +113,10 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1,
+    },
+    listContainer: {
+        flex: 1,
+        padding: 16
     }
 
 })
