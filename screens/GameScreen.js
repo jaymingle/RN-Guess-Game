@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Alert} from "react-native";
+import {View, StyleSheet, Alert, Text, FlatList} from "react-native";
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 import { Ionicons } from '@expo/vector-icons'
+import GuessLogItem from "../components/game/GuessLogItem";
 
 function generateRandomBetween(min, max, exclude) {
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -28,12 +29,18 @@ function GameScreen({userNumber, onGameOver}) {
     )
 
     const [currentGuess, setCurrentGuess] = useState(initialGuess)
+    const [guessRounds, setGuessRounds] = useState([initialGuess])
 
     useEffect(() => {
         if (currentGuess === userNumber){
             onGameOver()
         }
     }, [currentGuess, userNumber, onGameOver])
+
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100
+    }, []);
 
     function nextGuessHandler(direction){ //direction => 'lower', 'greater'
 
@@ -60,7 +67,10 @@ function GameScreen({userNumber, onGameOver}) {
             currentGuess
         )
         setCurrentGuess(newRndNumber)
+        setGuessRounds(prevGuessRounds => [newRndNumber, ...prevGuessRounds])
     }
+
+    const guessRoundsListLength = guessRounds.length
 
     return (
         <View style={styles.screen}>
@@ -78,7 +88,11 @@ function GameScreen({userNumber, onGameOver}) {
                 </View>
             </Card>
             <View>
-                {/*<Text>LOG Rounds</Text>*/}
+                <FlatList
+                    data={guessRounds}
+                    renderItem={(itemData) => <GuessLogItem guess={itemData.item} roundNumber={guessRoundsListLength - itemData.index}/>}
+                    keyExtractor={(item) => item}
+                />
             </View>
         </View>
     );
