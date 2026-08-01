@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text} from "react-native";
+import {StyleSheet, Text, Dimensions} from "react-native";
 
 function Title({children}) {
     return <Text style={styles.title}>{children}</Text>
@@ -7,9 +7,11 @@ function Title({children}) {
 
 export default Title;
 
+const deviceWidth = Dimensions.get('window').width
+
 const styles = StyleSheet.create({
     title: {
-        fontSize: 18,
+        fontSize: deviceWidth < 380 ? 18 : 24,
         color: 'white',
         textAlign: 'center',
         borderWidth: 2,
