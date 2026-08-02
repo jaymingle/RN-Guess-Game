@@ -18,7 +18,7 @@ function StartGameScreen({onPickNumber}) {
 
     const [enteredNumber, setEnteredNumber] = useState('')
 
-    const {width, height} = useWindowDimensions()
+    const { height} = useWindowDimensions()
 
     function numberInputHandler(enteredText){
         setEnteredNumber(enteredText)
